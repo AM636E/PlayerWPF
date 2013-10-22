@@ -27,28 +27,11 @@ namespace Player
         {            
             InitializeComponent();
 
-            IWavePlayer waveOutDevice = new WaveOut();
-            WaveStream mainOutputStream = CreateInputStream(@"D:\music\Song2\03. Музыка ночи (менуэт) (В. А. Моцарт).mp3");
+            PlayerHandler.Play(@"D:\music\Song2\03. Музыка ночи (менуэт) (В. А. Моцарт).mp3");
 
-            waveOutDevice.Init(mainOutputStream);
-
-            waveOutDevice.Play();
+            //PlayerHandler.Seek(8);
         }
 
-        WaveStream CreateInputStream(string filename)
-        {
-            WaveChannel32 inputStream;
-            if(filename.EndsWith(".mp3"))
-            {
-                WaveStream mp3Reader = new Mp3FileReader(filename);
-                inputStream = new WaveChannel32(mp3Reader);
-            }
-            else
-            {
-                throw new InvalidOperationException("unsupported extension");
-            }
-
-            return inputStream;
-        }
+       
     }
 }
