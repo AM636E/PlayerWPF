@@ -44,9 +44,14 @@ namespace Player
 
         public static void Seek(long offset)
         {
-            //mainOutputStream.Seek(offset, System.IO.SeekOrigin.Begin);
-            mainOutputStream.Position = offset;
+            mainOutputStream = CreateInputStream(_currFile);
+            mainOutputStream.Seek(offset, System.IO.SeekOrigin.Begin);
             waveOutDevice.Init(mainOutputStream);
+        }
+
+        public static void StartFromTime()
+        {
+
         }
 
         static WaveStream CreateInputStream(string filename)

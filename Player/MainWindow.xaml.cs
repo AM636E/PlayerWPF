@@ -29,7 +29,7 @@ namespace Player
 
             PlayerHandler.Play(@"D:\music\Song2\03. Музыка ночи (менуэт) (В. А. Моцарт).mp3");
 
-            //PlayerHandler.Seek(8);
+         //   PlayerHandler.Seek(8);
         }
 
        

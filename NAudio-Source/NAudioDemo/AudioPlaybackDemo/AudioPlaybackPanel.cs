@@ -280,6 +280,11 @@ namespace NAudioDemo.AudioPlaybackDemo
                 fileName = openFileDialog.FileName;
             }
         }
+
+        private void volumeSlider1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
