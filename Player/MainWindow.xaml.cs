@@ -23,15 +23,11 @@ namespace Player
     /// </summary>
     public partial class MainWindow : Window
     {
+        private PlayerHandler _player = new PlayerHandler();
+
         public MainWindow()
         {            
             InitializeComponent();
-
-            PlayerHandler.Play(@"D:\music\Song2\03. Музыка ночи (менуэт) (В. А. Моцарт).mp3");
-
-         //   PlayerHandler.Seek(8);
-        }
-
-       
+        }       
     }
 }

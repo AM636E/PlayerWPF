@@ -70,6 +70,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="IInputFileFormatPlugin.cs" />
+    <Compile Include="InputFileFormat.cs" />
     <Compile Include="IOutputDevicePlugin.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

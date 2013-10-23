@@ -75,46 +75,8 @@ namespace Player
         {
             CloseWaveOut();
             int latency = 300;
-            this.waveOut = new WaveOut(); //new Mp3FileReader();//SelectedOutputDevicePlugin.CreateDevice(latency);
-           // this.waveOut.PlaybackStopped += OnPlaybackStopped;
-        }
-
-        private WaveStream GetPluginForFile(String filename)
-        {
-            //switch(filename.Substring()
-            return new Mp3FileReader(filename);
-        }
-
-        private WaveStream GetStreamForFile(String filename)
-        {
-            if(filename.EndsWith(".mp3"))
-            {
-                return new Mp3FileReader(filename);
-            }
-            if(filename.EndsWith(".wav"))
-            {
-                return new WaveFileReader(filename);
-            }
-
-            throw new InvalidOperationException("Unsuported extension");
-        }
-
-        private ISampleProvider CreateInputStream(string fileName)
-        {
-            var plugin = GetPluginForFile(fileName);
-            if (plugin == null)
-            {
-                throw new InvalidOperationException("Unsupported file extension");
-            }
-            this.fileWaveStream = plugin;// plugin.CreateWaveStream(fileName);
-            var waveChannel = new SampleChannel(this.fileWaveStream, true);
-            this.setVolumeDelegate = (vol) => waveChannel.Volume = vol;
-            waveChannel.PreVolumeMeter += OnPreVolumeMeter;
-
-            var postVolumeMeter = new MeteringSampleProvider(waveChannel);
-            postVolumeMeter.StreamVolume += OnPostVolumeMeter;
-
-            return postVolumeMeter;
+            this.waveOut = //new Mp3FileReader();//SelectedOutputDevicePlugin.CreateDevice(latency);
+            this.waveOut.PlaybackStopped += OnPlaybackStopped;
         }
 
         private void CloseWaveOut()
