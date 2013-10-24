@@ -28,6 +28,10 @@ namespace Player
         public MainWindow()
         {            
             InitializeComponent();
+
+            _player.Play(@"D:\just music\Воздух\04-Ты распят был.mp3");
+
+            _player.Scroll(10);
         }       
     }
 }

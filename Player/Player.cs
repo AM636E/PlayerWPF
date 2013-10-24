@@ -31,7 +31,9 @@ namespace Player
                 }
             }
 
-            if (String.IsNullOrEmpty(fileName))
+           // MessageBox.Show(string.IsNullOrEmpty(filename).ToString());
+
+            if (string.IsNullOrEmpty(filename))
             {
                 return;
             }
@@ -49,7 +51,7 @@ namespace Player
             ISampleProvider sampleProvider = null;
             try
             {
-                sampleProvider = CreateInputStream(fileName);
+                sampleProvider = CreateInputStream(filename);
             }
             catch (Exception createException)
             {
@@ -66,9 +68,15 @@ namespace Player
                 MessageBox.Show(String.Format("{0}", initException.Message), "Error Initializing Output");
                 return;
             }
+         //   fileWaveStream.CurrentTime = TimeSpan.FromSeconds(200);
             _currentSong = filename;
            // setVolumeDelegate(); 
             waveOut.Play();
+        }
+
+        public void Scroll(double miliseconds)
+        {
+           fileWaveStream.CurrentTime = TimeSpan.FromSeconds(miliseconds);
         }
 
         private void CreateWaveOut()
@@ -109,10 +117,10 @@ namespace Player
             this.fileWaveStream = plugin;// plugin.CreateWaveStream(fileName);
             var waveChannel = new SampleChannel(this.fileWaveStream, true);
             this.setVolumeDelegate = (vol) => waveChannel.Volume = vol;
-            waveChannel.PreVolumeMeter += OnPreVolumeMeter;
+      //      waveChannel.PreVolumeMeter += OnPreVolumeMeter;
 
             var postVolumeMeter = new MeteringSampleProvider(waveChannel);
-            postVolumeMeter.StreamVolume += OnPostVolumeMeter;
+      //      postVolumeMeter.StreamVolume += OnPostVolumeMeter;
 
             return postVolumeMeter;
         }
