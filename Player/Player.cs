@@ -74,15 +74,15 @@ namespace Player
             waveOut.Play();
         }
 
-        public void Scroll(double miliseconds)
+        public void Scroll(double seconds)
         {
-           fileWaveStream.CurrentTime = TimeSpan.FromSeconds(miliseconds);
+            fileWaveStream.CurrentTime = TimeSpan.FromSeconds(seconds);
         }
 
         private void CreateWaveOut()
         {
             CloseWaveOut();
-            int latency = 300;
+        //    int latency = 300;
             this.waveOut = new WaveOut(); //new Mp3FileReader();//SelectedOutputDevicePlugin.CreateDevice(latency);
            // this.waveOut.PlaybackStopped += OnPlaybackStopped;
         }

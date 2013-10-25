@@ -31,7 +31,7 @@ namespace Player
 
             _player.Play(@"D:\just music\Воздух\04-Ты распят был.mp3");
 
-            _player.Scroll(10);
+            _player.Scroll(60);
         }       
     }
 }
