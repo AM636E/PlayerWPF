@@ -11,7 +11,6 @@ namespace Player
     class PlayerHandler
     {
         private IWavePlayer waveOut;
-        private string fileName = null;
         private WaveStream fileWaveStream;
         private Action<float> setVolumeDelegate;
         private string _currentSong;
@@ -30,8 +29,6 @@ namespace Player
                     return;
                 }
             }
-
-           // MessageBox.Show(string.IsNullOrEmpty(filename).ToString());
 
             if (string.IsNullOrEmpty(filename))
             {
@@ -68,7 +65,6 @@ namespace Player
                 MessageBox.Show(String.Format("{0}", initException.Message), "Error Initializing Output");
                 return;
             }
-         //   fileWaveStream.CurrentTime = TimeSpan.FromSeconds(200);
             _currentSong = filename;
            // setVolumeDelegate(); 
             waveOut.Play();
@@ -76,14 +72,15 @@ namespace Player
 
         public void Scroll(double seconds)
         {
+            console.log(fileWaveStream.CurrentTime);
           //  fileWaveStream.Seek((long)seconds, System.IO.SeekOrigin.Current);
-            
             fileWaveStream.CurrentTime = TimeSpan.FromSeconds(seconds);
         }
 
         private void CreateWaveOut()
         {
             CloseWaveOut();
+            
         //    int latency = 300;
             this.waveOut = new WaveOut(); //new Mp3FileReader();//SelectedOutputDevicePlugin.CreateDevice(latency);
            // this.waveOut.PlaybackStopped += OnPlaybackStopped;

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-namespace Mario
+namespace Player
 {
-    static class console
+    public static class console
     {
         private const string _path_ = "./log.txt";
 
