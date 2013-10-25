@@ -34,7 +34,7 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Button Name="_previosSong" Grid.Column="0">Previos</Button>
-                    <Button Name="_playPause" Grid.Column="1">Play</Button>
+                    <Button Name="_playPause" Grid.Column="1" Click="_playPause_Click">Play</Button>
                     <Button Name="_nextSong" Grid.Column="2">Next</Button>
                 </Grid>
             </Grid>

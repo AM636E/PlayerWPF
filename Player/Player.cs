@@ -15,6 +15,8 @@ namespace Player
         private Action<float> setVolumeDelegate;
         private string _currentSong;
 
+        public PlaybackState PlaybackState { get { return waveOut.PlaybackState; } }
+
         public void Play(string filename)
         {
             if (waveOut != null)
@@ -84,6 +86,20 @@ namespace Player
         //    int latency = 300;
             this.waveOut = new WaveOut(); //new Mp3FileReader();//SelectedOutputDevicePlugin.CreateDevice(latency);
            // this.waveOut.PlaybackStopped += OnPlaybackStopped;
+        }
+
+        public void Play()
+        {
+            if(string.IsNullOrEmpty(_currentSong))
+            {
+                return;
+            }
+            Play(_currentSong);
+        }
+
+        public void Pause()
+        {
+            waveOut.Pause();
         }
 
         private WaveStream GetPluginForFile(String filename)

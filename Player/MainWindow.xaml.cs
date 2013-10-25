@@ -32,6 +32,21 @@ namespace Player
             _player.Play(@"D:\just music\Воздух\04-Ты распят был.mp3");
 
             _player.Scroll(60);
+            _player.Pause();
+        }
+
+        private void _playPause_Click(object sender, RoutedEventArgs e)
+        {
+            if(_player.PlaybackState == PlaybackState.Playing)
+            {
+                _player.Pause();
+                _playPause.Content = "Pause";
+            }
+            else
+            {
+                _player.Play();
+                _playPause.Content = "Play";
+            }
         }       
     }
 }
