@@ -76,6 +76,8 @@ namespace Player
 
         public void Scroll(double seconds)
         {
+          //  fileWaveStream.Seek((long)seconds, System.IO.SeekOrigin.Current);
+            
             fileWaveStream.CurrentTime = TimeSpan.FromSeconds(seconds);
         }
 
