@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Windows.Threading;
 using System.Linq;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
@@ -14,7 +15,23 @@ namespace Player
         private WaveStream fileWaveStream;
         private Action<float> setVolumeDelegate;
         private string _currentSong;
+        private DispatcherTimer _songPlayTimer;
 
+        public PlayerHandler()
+        {
+            _songPlayTimer = new DispatcherTimer();
+            _songPlayTimer.Interval = new TimeSpan(0, 0, 1);
+        }
+
+        public void AddTimerHandler(EventHandler handler)
+        {
+            _songPlayTimer.Tick += handler;
+        }
+
+        public string CurrentSong { get { return _currentSong; } }
+        public TimeSpan SongTotalTime { get { return fileWaveStream.TotalTime; } }
+        public double SongLength { get { return fileWaveStream.TotalTime.TotalSeconds; } }
+        
         public PlaybackState PlaybackState { get { return waveOut.PlaybackState; } }
 
         public void Play(string filename)
@@ -68,24 +85,20 @@ namespace Player
                 return;
             }
             _currentSong = filename;
-           // setVolumeDelegate(); 
+            _songPlayTimer.Start();
             waveOut.Play();
         }
 
         public void Scroll(double seconds)
         {
             console.log(fileWaveStream.CurrentTime);
-          //  fileWaveStream.Seek((long)seconds, System.IO.SeekOrigin.Current);
             fileWaveStream.CurrentTime = TimeSpan.FromSeconds(seconds);
         }
 
         private void CreateWaveOut()
         {
             CloseWaveOut();
-            
-        //    int latency = 300;
-            this.waveOut = new WaveOut(); //new Mp3FileReader();//SelectedOutputDevicePlugin.CreateDevice(latency);
-           // this.waveOut.PlaybackStopped += OnPlaybackStopped;
+            this.waveOut = new WaveOut();
         }
 
         public void Play()
@@ -99,12 +112,12 @@ namespace Player
 
         public void Pause()
         {
+            _songPlayTimer.Stop();
             waveOut.Pause();
         }
 
         private WaveStream GetPluginForFile(String filename)
         {
-            //switch(filename.Substring()
             return new Mp3FileReader(filename);
         }
 

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using QuartzTypeLib;
 using NAudio;
 using NAudio.Wave;
@@ -24,7 +25,6 @@ namespace Player
     public partial class MainWindow : Window
     {
         private PlayerHandler _player = new PlayerHandler();
-
         public MainWindow()
         {            
             InitializeComponent();
