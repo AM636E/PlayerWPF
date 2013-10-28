@@ -24,5 +24,9 @@ namespace Player
         {
             InitializeComponent();
         }
+
+        public ButtonControl(string pathToImage)
+            :this()
+        { }
     }
 }

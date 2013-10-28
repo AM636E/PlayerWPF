@@ -33,9 +33,10 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Name="_previosSong" Grid.Column="0">Previos</Button>
-                    <Button Name="_playPause" Grid.Column="1" Click="_playPause_Click">Play</Button>
-                    <Button Name="_nextSong" Grid.Column="2">Next</Button>
+                    <Image Source="D:\GitHub\HTML_CSS_JAVASCRIPT\task3\memory_puzzle\images\2.jpg" Grid.Column="0"></Image>
+                    <Image Name="_play" MouseUp="_play_MouseUp" Source="D:\GitHub\HTML_CSS_JAVASCRIPT\task3\memory_puzzle\images\2.jpg" Grid.Column="1"></Image>
+                    <Image Name="_pause" MouseUp="_pause_MouseUp" Source="D:\GitHub\HTML_CSS_JAVASCRIPT\task3\memory_puzzle\images\2.jpg" Grid.Column="1"></Image>
+                    <Image Source="D:\GitHub\HTML_CSS_JAVASCRIPT\task3\memory_puzzle\images\2.jpg" Grid.Column="2"></Image>
                 </Grid>
             </Grid>
         </Grid>

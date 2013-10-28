@@ -30,23 +30,20 @@ namespace Player
             InitializeComponent();
 
             _player.Play(@"D:\just music\Воздух\04-Ты распят был.mp3");
-
-            _player.Scroll(60);
-            _player.Pause();
         }
 
-        private void _playPause_Click(object sender, RoutedEventArgs e)
+        private void _play_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if(_player.PlaybackState == PlaybackState.Playing)
-            {
-                _player.Pause();
-                _playPause.Content = "Pause";
-            }
-            else
-            {
-                _player.Play();
-                _playPause.Content = "Play";
-            }
-        }       
+            _player.Play();
+            _pause.Visibility = System.Windows.Visibility.Visible;
+            _play.Visibility = System.Windows.Visibility.Hidden;
+        }
+
+        private void _pause_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            _player.Pause();
+            _pause.Visibility = System.Windows.Visibility.Hidden;
+            _play.Visibility = System.Windows.Visibility.Visible;
+        }
     }
 }
