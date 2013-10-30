@@ -9,10 +9,10 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="26*"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Name="_searchBar"></TextBlock>
+            <TextBox Grid.Row="0" Name="_searchBar"></TextBox>
             <ListView Grid.Row="1" Name="_playlist">
             </ListView>
         </Grid>

@@ -73,32 +73,9 @@ namespace Player
             }
 
             ISampleProvider sampleProvider = null;
-            sampleProvider = CreateInputStream(plugin);
-
-            waveOut.Init(new SampleToWaveProvider(sampleProvider));
-        }
-
-        public void Play(string filename)
-        {
-            if (string.IsNullOrEmpty(filename))
-            {
-                return;
-            }
-
             try
             {
-                CreateWaveOut();
-            }
-            catch (Exception driverCreateException)
-            {
-                MessageBox.Show(String.Format("{0}", driverCreateException.Message));
-                return;
-            }
-
-            ISampleProvider sampleProvider = null;
-            try
-            {
-                sampleProvider = CreateInputStream(filename);
+                sampleProvider = CreateInputStream(plugin);
             }
             catch (Exception createException)
             {
@@ -115,8 +92,7 @@ namespace Player
                 MessageBox.Show(String.Format("{0}", initException.Message), "Error Initializing Output");
                 return;
             }
-            
-            _currentSong = filename;
+
             _songPlayTimer.Start();
 
             if(NewSongStarted != null)
@@ -127,8 +103,23 @@ namespace Player
             waveOut.Play();
         }
 
+        public void Play(string filename)
+        {
+            if (string.IsNullOrEmpty(filename))
+            {
+                return;
+            }
+
+            _currentSong = filename;
+
+            Play(GetStreamForFile(filename));
+        }
+
         public void Play(Song song)
-        { }
+        {
+            _currentSong = song.Path;
+            Play(song.Stream);
+        }
 
         public void Scroll(double seconds)
         {

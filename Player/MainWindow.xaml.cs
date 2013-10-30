@@ -30,8 +30,10 @@ namespace Player
             InitializeComponent();
             _player.AddTimerHandler(SongHandler);
             _player.NewSongStarted += _player_NewSongStarted;
-            _player.Play(@"D:\just music\Воздух\04-Ты распят был.mp3");
+            //_player.Play(@"D:\just music\Воздух\04-Ты распят был.mp3");
 
+            Song song = new Song(@"D:\just music\Воздух\04-Ты распят был.mp3");
+            _player.Play(song);
             _playStatus.MouseDown += (o, e) => { };
         }
 
