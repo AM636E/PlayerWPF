@@ -25,16 +25,17 @@ namespace Player
     public partial class MainWindow : Window
     {
         private PlayerHandler _player = new PlayerHandler();
-        private Playlist _playlist;
+        private Playlist _pl;
         public MainWindow()
         {            
             InitializeComponent();
             _player.AddTimerHandler(SongHandler);
             _player.NewSongStarted += _player_NewSongStarted;
             //_player.Play(@"D:\just music\Воздух\04-Ты распят был.mp3");
-            _playStatus.MouseDown += (o, e) => { };
+            _pl = new Playlist();
 
-
+            _pl.Add(new Song(@"D:\just music\Воздух\04-Ты распят был.mp3"));
+            _pl.Play(_player);
         }
 
         void _player_NewSongStarted(object sender, EventArgs e)

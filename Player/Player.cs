@@ -16,8 +16,8 @@ namespace Player
         public event EventHandler SongStarted;
 
 
-        private int _secondsPlayed = 0;
-        public int SecondsPlayed { get { return _secondsPlayed; } }
+        private double _secondsPlayed = 0;
+        public double SecondsPlayed { get { return _secondsPlayed; } }
         private IWavePlayer waveOut;
         private WaveStream fileWaveStream;
         private Action<float> setVolumeDelegate;
@@ -31,10 +31,9 @@ namespace Player
             AddTimerHandler(
             (o, e) =>
             {
-                _secondsPlayed++;
+                _secondsPlayed = SongTotalTime.Seconds;
                 if(_secondsPlayed >= SongLengthSeconds && SongEnded != null )
                 {
-                    _secondsPlayed = 0;
                     SongEnded(this, EventArgs.Empty);
                 }
             });
@@ -46,8 +45,10 @@ namespace Player
         }
 
         public string CurrentSong { get { return _currentSong; } }
+        public TimeSpan CurrentTime { get { return fileWaveStream.CurrentTime; } }
         public TimeSpan SongTotalTime { get { return fileWaveStream.TotalTime; } }
         public double SongLengthSeconds { get { return fileWaveStream.TotalTime.TotalSeconds; } }
+        public double SongCurrentSeconds { get { return CurrentTime.TotalSeconds; } }
         
         public PlaybackState PlaybackState { get { return waveOut.PlaybackState; } }
 
