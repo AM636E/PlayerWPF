@@ -28,8 +28,16 @@ namespace Player
         public MainWindow()
         {            
             InitializeComponent();
+           // _player.AddTimerHandler(SongHandler);
+            _player.Play(@"D:\just music\Воздух\04-Ты распят был.mp3");            
+        }
 
-            _player.Play(@"D:\just music\Воздух\04-Ты распят был.mp3");
+        private void SongHandler(object sender, EventArgs e)
+        {
+            if(_player.PlaybackState != PlaybackState.Paused)
+            {
+                _playStatus.Value++;
+            }
         }
 
         private void _play_MouseUp(object sender, MouseButtonEventArgs e)

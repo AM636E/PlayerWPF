@@ -11,6 +11,10 @@ namespace Player
 {
     class PlayerHandler
     {
+        public event EventHandler NewSongStarted;
+        public event EventHandler SongPaused;
+        public event EventHandler SongStarted;
+
         private IWavePlayer waveOut;
         private WaveStream fileWaveStream;
         private Action<float> setVolumeDelegate;
@@ -84,8 +88,15 @@ namespace Player
                 MessageBox.Show(String.Format("{0}", initException.Message), "Error Initializing Output");
                 return;
             }
+            
             _currentSong = filename;
             _songPlayTimer.Start();
+
+            if(NewSongStarted != null)
+            {
+                NewSongStarted(this, EventArgs.Empty);
+            }
+            
             waveOut.Play();
         }
 
@@ -111,9 +122,16 @@ namespace Player
                 else if (waveOut.PlaybackState == PlaybackState.Paused)
                 {
                     waveOut.Play();
+                    
+                    if(SongStarted != null)
+                    {
+                        SongStarted(this, EventArgs.Empty);
+                    }
+
                     return;
                 }
             }
+            _songPlayTimer.Start();
         }
 
         public void Pause()
