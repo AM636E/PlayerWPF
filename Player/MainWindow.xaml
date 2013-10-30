@@ -27,7 +27,8 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <Slider Name="_playStatus"></Slider>
+                <Slider Name="_playStatus" Thumb.DragStarted="_playStatus_DragStarted"  Thumb.DragCompleted="_playStatus_DragCompleted" >
+                </Slider>
                 <Grid Grid.Column="1" Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>

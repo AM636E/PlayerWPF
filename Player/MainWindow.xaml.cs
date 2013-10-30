@@ -30,7 +30,9 @@ namespace Player
             InitializeComponent();
             _player.AddTimerHandler(SongHandler);
             _player.NewSongStarted += _player_NewSongStarted;
-            _player.Play(@"D:\just music\Воздух\04-Ты распят был.mp3");         
+            _player.Play(@"D:\just music\Воздух\04-Ты распят был.mp3");
+
+            _playStatus.MouseDown += (o, e) => { };
         }
 
         void _player_NewSongStarted(object sender, EventArgs e)
@@ -59,6 +61,16 @@ namespace Player
             _player.Pause();
             _pause.Visibility = System.Windows.Visibility.Hidden;
             _play.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void _playStatus_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        {
+            _player.Scroll(_playStatus.Value);
+        }
+
+        private void _playStatus_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            _player.Scroll(_playStatus.Value);
         }
     }
 }
