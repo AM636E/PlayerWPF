@@ -12,9 +12,12 @@ namespace Player
     class PlayerHandler
     {
         public event EventHandler NewSongStarted;
-        public event EventHandler SongPaused;
+        public event EventHandler SongEnded;
         public event EventHandler SongStarted;
 
+
+        private int _secondsPlayed = 0;
+        public int SecondsPlayed { get { return _secondsPlayed; } }
         private IWavePlayer waveOut;
         private WaveStream fileWaveStream;
         private Action<float> setVolumeDelegate;
@@ -25,6 +28,16 @@ namespace Player
         {
             _songPlayTimer = new DispatcherTimer();
             _songPlayTimer.Interval = new TimeSpan(0, 0, 1);
+            AddTimerHandler(
+            (o, e) =>
+            {
+                _secondsPlayed++;
+                if(_secondsPlayed >= SongLengthSeconds && SongEnded != null )
+                {
+                    _secondsPlayed = 0;
+                    SongEnded(this, EventArgs.Empty);
+                }
+            });
         }
 
         public void AddTimerHandler(EventHandler handler)
@@ -34,7 +47,7 @@ namespace Player
 
         public string CurrentSong { get { return _currentSong; } }
         public TimeSpan SongTotalTime { get { return fileWaveStream.TotalTime; } }
-        public double SongLength { get { return fileWaveStream.TotalTime.TotalSeconds; } }
+        public double SongLengthSeconds { get { return fileWaveStream.TotalTime.TotalSeconds; } }
         
         public PlaybackState PlaybackState { get { return waveOut.PlaybackState; } }
 
@@ -60,7 +73,7 @@ namespace Player
             }
         }
 
-        private void Play(WaveStream plugin)
+        private void Play(WaveStream stream)
         {
             try
             {
@@ -75,7 +88,7 @@ namespace Player
             ISampleProvider sampleProvider = null;
             try
             {
-                sampleProvider = CreateInputStream(plugin);
+                sampleProvider = CreateInputStream(stream);
             }
             catch (Exception createException)
             {
@@ -111,7 +124,6 @@ namespace Player
             }
 
             _currentSong = filename;
-
             Play(GetStreamForFile(filename));
         }
 
