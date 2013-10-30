@@ -28,8 +28,14 @@ namespace Player
         public MainWindow()
         {            
             InitializeComponent();
-           // _player.AddTimerHandler(SongHandler);
+            _player.AddTimerHandler(SongHandler);
+            _player.NewSongStarted += _player_NewSongStarted;
             _player.Play(@"D:\just music\Воздух\04-Ты распят был.mp3");            
+        }
+
+        void _player_NewSongStarted(object sender, EventArgs e)
+        {
+            _playStatus.Maximum = _player.SongLength;
         }
 
         private void SongHandler(object sender, EventArgs e)

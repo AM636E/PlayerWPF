@@ -122,7 +122,7 @@ namespace Player
                 else if (waveOut.PlaybackState == PlaybackState.Paused)
                 {
                     waveOut.Play();
-                    
+                    _songPlayTimer.Start();
                     if(SongStarted != null)
                     {
                         SongStarted(this, EventArgs.Empty);
@@ -131,7 +131,7 @@ namespace Player
                     return;
                 }
             }
-            _songPlayTimer.Start();
+            
         }
 
         public void Pause()
