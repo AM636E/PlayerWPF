@@ -130,8 +130,7 @@ namespace Player
 
                     return;
                 }
-            }
-            
+            }            
         }
 
         public void Pause()
@@ -169,10 +168,8 @@ namespace Player
             this.fileWaveStream = plugin;
             var waveChannel = new SampleChannel(this.fileWaveStream, true);
             this.setVolumeDelegate = (vol) => waveChannel.Volume = vol;
-      //      waveChannel.PreVolumeMeter += OnPreVolumeMeter;
 
             var postVolumeMeter = new MeteringSampleProvider(waveChannel);
-      //      postVolumeMeter.StreamVolume += OnPostVolumeMeter;
 
             return postVolumeMeter;
         }
