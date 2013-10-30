@@ -15,6 +15,7 @@ namespace Player
 
         public string Path { get { return _path; } }
         public string Extension { get { return _path.Substring(_path.LastIndexOf('.')); } }
+        public WaveStream Stream { get { return _stream; } }
 
         public Song()
         { }

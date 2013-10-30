@@ -38,7 +38,7 @@ namespace Player
         
         public PlaybackState PlaybackState { get { return waveOut.PlaybackState; } }
 
-        public void Play(string filename)
+        public void Play()
         {
             if (waveOut != null)
             {
@@ -49,10 +49,37 @@ namespace Player
                 else if (waveOut.PlaybackState == PlaybackState.Paused)
                 {
                     waveOut.Play();
+                    _songPlayTimer.Start();
+                    if (SongStarted != null)
+                    {
+                        SongStarted(this, EventArgs.Empty);
+                    }
+
                     return;
                 }
             }
+        }
 
+        private void Play(WaveStream plugin)
+        {
+            try
+            {
+                CreateWaveOut();
+            }
+            catch (Exception driverCreateException)
+            {
+                MessageBox.Show(String.Format("{0}", driverCreateException.Message));
+                return;
+            }
+
+            ISampleProvider sampleProvider = null;
+            sampleProvider = CreateInputStream(plugin);
+
+            waveOut.Init(new SampleToWaveProvider(sampleProvider));
+        }
+
+        public void Play(string filename)
+        {
             if (string.IsNullOrEmpty(filename))
             {
                 return;
@@ -100,6 +127,9 @@ namespace Player
             waveOut.Play();
         }
 
+        public void Play(Song song)
+        { }
+
         public void Scroll(double seconds)
         {
             fileWaveStream.CurrentTime = TimeSpan.FromSeconds(seconds);
@@ -109,29 +139,7 @@ namespace Player
         {
             CloseWaveOut();
             this.waveOut = new WaveOut();
-        }
-
-        public void Play()
-        {
-            if (waveOut != null)
-            {
-                if (waveOut.PlaybackState == PlaybackState.Playing)
-                {
-                    return;
-                }
-                else if (waveOut.PlaybackState == PlaybackState.Paused)
-                {
-                    waveOut.Play();
-                    _songPlayTimer.Start();
-                    if(SongStarted != null)
-                    {
-                        SongStarted(this, EventArgs.Empty);
-                    }
-
-                    return;
-                }
-            }            
-        }
+        }        
 
         public void Pause()
         {
@@ -158,6 +166,20 @@ namespace Player
             throw new InvalidOperationException("Unsuported extension");
         }
 
+        private ISampleProvider CreateInputStream(WaveStream plugin)
+        {
+            this.fileWaveStream = plugin;
+            var waveChannel = new SampleChannel(this.fileWaveStream, true);
+            var postVolumeMeter = new MeteringSampleProvider(waveChannel);
+
+            return postVolumeMeter;
+        }
+
+        private ISampleProvider CreateInputStream(Song song)
+        {
+            return CreateInputStream(song.Stream);
+        }
+
         private ISampleProvider CreateInputStream(string fileName)
         {
             var plugin = GetPluginForFile(fileName);
@@ -165,14 +187,9 @@ namespace Player
             {
                 throw new InvalidOperationException("Unsupported file extension");
             }
-            this.fileWaveStream = plugin;
-            var waveChannel = new SampleChannel(this.fileWaveStream, true);
-            this.setVolumeDelegate = (vol) => waveChannel.Volume = vol;
 
-            var postVolumeMeter = new MeteringSampleProvider(waveChannel);
-
-            return postVolumeMeter;
-        }
+            return CreateInputStream(plugin);
+        }        
 
         private void CloseWaveOut()
         {
