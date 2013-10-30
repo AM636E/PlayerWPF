@@ -148,7 +148,7 @@ namespace Player
             {
                 throw new InvalidOperationException("Unsupported file extension");
             }
-            this.fileWaveStream = plugin;// plugin.CreateWaveStream(fileName);
+            this.fileWaveStream = plugin;
             var waveChannel = new SampleChannel(this.fileWaveStream, true);
             this.setVolumeDelegate = (vol) => waveChannel.Volume = vol;
       //      waveChannel.PreVolumeMeter += OnPreVolumeMeter;
