@@ -91,7 +91,6 @@ namespace Player
 
         public void Scroll(double seconds)
         {
-            console.log(fileWaveStream.CurrentTime);
             fileWaveStream.CurrentTime = TimeSpan.FromSeconds(seconds);
         }
 
@@ -103,11 +102,18 @@ namespace Player
 
         public void Play()
         {
-            if(string.IsNullOrEmpty(_currentSong))
+            if (waveOut != null)
             {
-                return;
+                if (waveOut.PlaybackState == PlaybackState.Playing)
+                {
+                    return;
+                }
+                else if (waveOut.PlaybackState == PlaybackState.Paused)
+                {
+                    waveOut.Play();
+                    return;
+                }
             }
-            Play(_currentSong);
         }
 
         public void Pause()
