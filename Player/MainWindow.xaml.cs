@@ -31,7 +31,6 @@ namespace Player
             InitializeComponent();
             _player.AddTimerHandler(SongHandler);
             _player.NewSongStarted += _player_NewSongStarted;
-            //_player.Play(@"D:\just music\Воздух\04-Ты распят был.mp3");
             _pl = new Playlist();
 
             _pl.Add(new Song(@"D:\just music\Воздух\04-Ты распят был.mp3"));
