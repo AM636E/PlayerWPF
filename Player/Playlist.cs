@@ -35,6 +35,8 @@ namespace Player
         }
 
         void player_SongEnded(object sender, EventArgs e)
+        
+        
         {
             PlayerHandler p = sender as PlayerHandler;
 

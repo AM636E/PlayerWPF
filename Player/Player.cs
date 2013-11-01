@@ -11,6 +11,7 @@ namespace Player
 {
     class PlayerHandler
     {
+
         public event EventHandler NewSongStarted;
         public event EventHandler SongEnded;
         public event EventHandler SongStarted;
@@ -31,9 +32,11 @@ namespace Player
             AddTimerHandler(
             (o, e) =>
             {
-                _secondsPlayed = SongTotalTime.Seconds;
+                _secondsPlayed = SongTotalTime.TotalSeconds;
+                console.log(SongTotalTime.TotalSeconds, " seconds");
                 if(_secondsPlayed >= SongLengthSeconds && SongEnded != null )
                 {
+                    console.log("song ended");
                     SongEnded(this, EventArgs.Empty);
                 }
             });
@@ -96,7 +99,7 @@ namespace Player
                 MessageBox.Show(String.Format("{0}", createException.Message), "Error Loading File");
                 return;
             }
-
+            waveOut = new WaveOut();
             try
             {
                 waveOut.Init(new SampleToWaveProvider(sampleProvider));
@@ -109,12 +112,12 @@ namespace Player
 
             _songPlayTimer.Start();
 
-            if(NewSongStarted != null)
+            if (NewSongStarted != null)
             {
                 NewSongStarted(this, EventArgs.Empty);
             }
-            
-            waveOut.Play();
+                waveOut.Play();
+     
         }
 
         public void Play(string filename)
