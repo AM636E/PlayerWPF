@@ -14,9 +14,6 @@
             </Grid.RowDefinitions>
             <TextBox Grid.Row="0" Name="_searchBar"></TextBox>
             <ListView Grid.Row="1" Name="_playlist">
-                <ListViewItem>
-                    AAA
-                </ListViewItem>
             </ListView>
         </Grid>
         <Grid Grid.Column="1">

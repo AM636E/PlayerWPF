@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace Player
 {
@@ -45,6 +46,34 @@ namespace Player
             }
         }
 
+        List<string> _searchedFiles = new List<string>();
+        public void SearchForSongs(DirectoryInfo[] dirs)
+        {
+            foreach(DirectoryInfo directory in dirs)
+            {
+                foreach(FileInfo file in directory.GetFiles())
+                {
+                    if(file.Name.EndsWith(".mp3"))
+                    {
+                        _searchedFiles.Add(file.Name);
+                    }
+                }
+
+                SearchForSongs(directory.GetDirectories());
+            }
+        }
+
+        public void Add(DirectoryInfo dir)
+        {
+            _searchedFiles.Clear();
+            SearchForSongs(dir.GetDirectories());
+
+            for(var i = 0 ; i < _searchedFiles.Count; i ++ )
+            {
+                this.Add(new Song(_searchedFiles[i]));
+            }
+        }
+
         public Playlist Search(string pattern)
         {
             Playlist results = new Playlist();
@@ -54,6 +83,7 @@ namespace Player
 
         public void Play(Player.PlayerHandler player)
         {
+            _player = player;
             player.SongEnded += player_SongEnded;
             player.Play(this[0]);
         }

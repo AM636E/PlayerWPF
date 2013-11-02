@@ -23,6 +23,10 @@ namespace Player
             {
                 items[i] = new ListViewItem();
                 items[i].Content = this[i];
+                items[i].MouseDoubleClick += (o, e) =>
+                {
+                    _player.Play(((o as ListViewItem).Content as Song));
+                };
             }
 
             return items;
