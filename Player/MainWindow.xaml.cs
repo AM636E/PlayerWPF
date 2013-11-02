@@ -43,7 +43,7 @@ namespace Player
             _player.SongEnded += (o, e) =>
                 {
                     _player.Play(_pl.CurrentSong);
-                };
+                }
         }
 
         void _player_NewSongStarted(object sender, EventArgs e)

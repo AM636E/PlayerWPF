@@ -122,7 +122,7 @@ namespace Player
 
         public void Stop()
         {
-            waveOut.Stop();
+            CloseWaveOut();
         }
 
         public void Play(string filename)
@@ -201,7 +201,9 @@ namespace Player
             }
 
             return CreateInputStream(plugin);
-        }        
+        }
+
+
 
         private void CloseWaveOut()
         {
