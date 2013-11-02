@@ -17,12 +17,12 @@ namespace Player
 
         public ListViewItem[] ToListItems()
         {
-            ListViewItem[] items = new ListViewItem[p.Count];
+            ListViewItem[] items = new ListViewItem[this.Count];
 
-            for (var i = 0; i < p.Count; i++)
+            for (var i = 0; i < this.Count; i++)
             {
                 items[i] = new ListViewItem();
-                items[i].Content = p[i];
+                items[i].Content = this[i];
             }
 
             return items;
