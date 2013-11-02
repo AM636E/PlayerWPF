@@ -44,5 +44,11 @@ namespace Player
                     }
             }
         }
+
+        public override string ToString()
+        {
+            
+            return this.Path.Substring(this.Path.LastIndexOfAny(new char[]{'\\', '/'}) + 1);
+        }
     }
 }

@@ -38,6 +38,8 @@ namespace Player
 
             _pl.Play(_player);
 
+            _pl.ShowInListView(_playlist);
+
             _player.SongEnded += (o, e) =>
                 {
                     _player.Play(_pl.CurrentSong);
