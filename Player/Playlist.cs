@@ -51,12 +51,19 @@ namespace Player
         {
             foreach(DirectoryInfo directory in dirs)
             {
-                foreach(FileInfo file in directory.GetFiles())
+                try
                 {
-                    if(file.Name.EndsWith(".mp3"))
+                    foreach (FileInfo file in directory.GetFiles())
                     {
-                        _searchedFiles.Add(file.Name);
+                        if (file.Name.EndsWith(".mp3"))
+                        {
+                            _searchedFiles.Add(file.FullName);
+                        }
                     }
+                }
+                catch(Exception e)
+                {
+                    console.log(this, " ", e.Message);
                 }
 
                 SearchForSongs(directory.GetDirectories());
@@ -66,7 +73,14 @@ namespace Player
         public void Add(DirectoryInfo dir)
         {
             _searchedFiles.Clear();
-            SearchForSongs(dir.GetDirectories());
+            try
+            {
+                SearchForSongs(dir.GetDirectories());
+            }
+            catch(Exception e)
+            {
+                console.log(e);
+            }
 
             for(var i = 0 ; i < _searchedFiles.Count; i ++ )
             {

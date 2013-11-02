@@ -25,7 +25,10 @@ namespace Player
                 items[i].Content = this[i];
                 items[i].MouseDoubleClick += (o, e) =>
                 {
-                    _player.Play(((o as ListViewItem).Content as Song));
+                    Song song = ((o as ListViewItem).Content as Song);
+                    _currentSongIndex = this.IndexOf(song);
+
+                    _player.Play(song);
                 };
             }
 

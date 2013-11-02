@@ -16,6 +16,7 @@ using System.Windows.Threading;
 using QuartzTypeLib;
 using NAudio;
 using NAudio.Wave;
+using System.IO;
 
 namespace Player
 {
@@ -32,10 +33,11 @@ namespace Player
             _player.AddTimerHandler(SongHandler);
             _player.NewSongStarted += _player_NewSongStarted;
             _pl = new Playlist();
-
-            _pl.Add(new Song(@"D:\just music\Воздух\04-Ты распят был.mp3"));
-            _pl.Add(new Song(@"D:\just music\Воздух\04-Ты распят был.mp3"));
-
+            try
+            {
+                _pl.Add(new DirectoryInfo(@"D:\just music"));
+            }
+            catch (Exception e) { console.log(e); }
             _pl.Play(_player);
 
             _pl.ShowInListView(_playlist);
