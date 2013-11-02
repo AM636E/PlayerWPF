@@ -12,18 +12,27 @@ namespace Player
     {
         public static implicit operator ListViewItem[] (Playlist p)
         {
+            return p.ToListItems();
+        }
+
+        public ListViewItem[] ToListItems()
+        {
             ListViewItem[] items = new ListViewItem[p.Count];
 
-            //for()
+            for (var i = 0; i < p.Count; i++)
+            {
+                items[i] = new ListViewItem();
+                items[i].Content = p[i];
+            }
 
             return items;
         }
 
         public void ShowInListView(ListView lv)
         {
-            foreach(Object o in this)
+            foreach (var i in (ListViewItem[])this)
             {
-                lv.Items.Add(o);
+                lv.Items.Add(i);
             }
         }
     }
