@@ -73,6 +73,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Playlist.cs" />
+    <Compile Include="PlaylistUI.cs" />
     <Compile Include="Song.cs" />
     <Page Include="ButtonControl.xaml">
       <SubType>Designer</SubType>
