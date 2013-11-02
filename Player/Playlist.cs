@@ -8,7 +8,19 @@ namespace Player
 {
     class Playlist : List<Song>
     {
+        private PlayerHandler _player;
         private int _currentSongIndex = 0;
+
+        public Song CurrentSong
+        {
+            get { return this[_currentSongIndex]; }
+        }
+
+        public Playlist(PlayerHandler player)
+            :base()
+        {
+            _player = player;
+        }
 
         //Uses Fisher-Yates Shuffle algorithm
         public void Shuffle()
@@ -34,16 +46,16 @@ namespace Player
             player.Play(this[0]);
         }
 
+        public void Play()
+        {
+            Play(_player);
+        }
+
         void player_SongEnded(object sender, EventArgs e)       
         {
-            PlayerHandler p = sender as PlayerHandler;
-            p.Stop();
-            if(_currentSongIndex >= this.Count)
-            {
-                _currentSongIndex = 0;
-            }
+           // _currentSongIndex = (++_currentSongIndex > this.Count) ? 0 : _currentSongIndex;
 
-            p.Play(this[_currentSongIndex]);
+            _currentSongIndex = 0;
         }
     }
 }

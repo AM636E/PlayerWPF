@@ -32,7 +32,7 @@ namespace Player
             AddTimerHandler(
             (o, e) =>
             {
-                _secondsPlayed = SongTotalTime.TotalSeconds;
+                _secondsPlayed = CurrentTime.TotalSeconds;
                 console.log(SongTotalTime.TotalSeconds, " seconds");
                 if(_secondsPlayed >= SongLengthSeconds && SongEnded != null )
                 {
@@ -139,7 +139,7 @@ namespace Player
         public void Play(Song song)
         {
             _currentSong = song.Path;
-            Play(song.Stream);
+            Play(song.Path);
         }
 
         public void Scroll(double seconds)

@@ -31,9 +31,17 @@ namespace Player
             InitializeComponent();
             _player.AddTimerHandler(SongHandler);
             _player.NewSongStarted += _player_NewSongStarted;
-            _pl = new Playlist();
+            _pl = new Playlist(_player);
 
-            _player.Play(new Song(@"D:\just music\Воздух\04-Ты распят был.mp3"));
+            _pl.Add(new Song(@"D:\just music\Воздух\04-Ты распят был.mp3"));
+            _pl.Add(new Song(@"D:\just music\Воздух\04-Ты распят был.mp3"));
+
+            _pl.Play(_player);
+
+            _player.SongEnded += (o, e) =>
+                {
+                    _player.Play(_pl.CurrentSong);
+                };
         }
 
         void _player_NewSongStarted(object sender, EventArgs e)
