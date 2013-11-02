@@ -32,6 +32,7 @@ namespace Player
                 };
             }
 
+            items[0].Visibility = System.Windows.Visibility.Collapsed;
             return items;
         }
 
