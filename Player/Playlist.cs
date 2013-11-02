@@ -53,9 +53,7 @@ namespace Player
 
         void player_SongEnded(object sender, EventArgs e)       
         {
-           // _currentSongIndex = (++_currentSongIndex > this.Count) ? 0 : _currentSongIndex;
-
-            _currentSongIndex = 0;
+           _currentSongIndex = (++_currentSongIndex > this.Count) ? 0 : _currentSongIndex;
         }
     }
 }
