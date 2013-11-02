@@ -12,10 +12,10 @@ namespace Player
     {
         public static implicit operator ListViewItem[] (Playlist p)
         {
-            return p.ToListItems();
+            return p.ToListViewItems();
         }
 
-        public ListViewItem[] ToListItems()
+        public ListViewItem[] ToListViewItems()
         {
             ListViewItem[] items = new ListViewItem[this.Count];
 
