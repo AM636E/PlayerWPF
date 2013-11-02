@@ -34,12 +34,10 @@ namespace Player
             player.Play(this[0]);
         }
 
-        void player_SongEnded(object sender, EventArgs e)
-        
-        
+        void player_SongEnded(object sender, EventArgs e)       
         {
             PlayerHandler p = sender as PlayerHandler;
-
+            p.Stop();
             if(_currentSongIndex >= this.Count)
             {
                 _currentSongIndex = 0;

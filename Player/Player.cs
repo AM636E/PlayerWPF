@@ -116,8 +116,13 @@ namespace Player
             {
                 NewSongStarted(this, EventArgs.Empty);
             }
-                waveOut.Play();
-     
+
+            waveOut.Play();     
+        }
+
+        public void Stop()
+        {
+            waveOut.Stop();
         }
 
         public void Play(string filename)

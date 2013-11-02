@@ -33,8 +33,7 @@ namespace Player
             _player.NewSongStarted += _player_NewSongStarted;
             _pl = new Playlist();
 
-            _pl.Add(new Song(@"D:\just music\Воздух\04-Ты распят был.mp3"));
-            _pl.Play(_player);
+            _player.Play(new Song(@"D:\just music\Воздух\04-Ты распят был.mp3"));
         }
 
         void _player_NewSongStarted(object sender, EventArgs e)
