@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Player
 {
-    class Playlist : List<Song>
+    partial class Playlist : List<Song>
     {
         private PlayerHandler _player;
         private int _currentSongIndex = 0;
@@ -16,8 +17,12 @@ namespace Player
             get { return this[_currentSongIndex]; }
         }
 
-        public Playlist(PlayerHandler player)
+        public Playlist()
             :base()
+        { }
+
+        public Playlist(PlayerHandler player)
+            :this()
         {
             _player = player;
         }
@@ -38,6 +43,13 @@ namespace Player
                 this[j] = this[i];
                 this[i] = tmp;
             }
+        }
+
+        public Playlist Search(string pattern)
+        {
+            Playlist results = new Playlist();
+
+            return results;
         }
 
         public void Play(Player.PlayerHandler player)
