@@ -12,6 +12,8 @@ namespace Player
     {
         private PlayerHandler _player;
         private int _currentSongIndex = 0;
+        private List<int> _shuffledIndeces;
+        private bool _shoofled = false;
 
         public Song CurrentSong
         {
@@ -39,11 +41,18 @@ namespace Player
                 //generate random number j ( 0 =< j < items countdown );
                 j = rnd.Next(0, i);
 
+                this[i].NormalIndex = i;
+
                 //swap items
                 tmp = this[j];
                 this[j] = this[i];
                 this[i] = tmp;
             }
+        }
+
+        public void UnShuffle()
+        {
+
         }
 
         List<string> _searchedFiles = new List<string>();
@@ -109,7 +118,7 @@ namespace Player
 
         void player_SongEnded(object sender, EventArgs e)       
         {
-           _currentSongIndex = (++_currentSongIndex > this.Count) ? 0 : _currentSongIndex;
+           _currentSongIndex = (++_currentSongIndex >= this.Count) ? 0 : _currentSongIndex;
         }
     }
 }

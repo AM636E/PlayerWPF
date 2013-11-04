@@ -12,6 +12,9 @@ namespace Player
     {
         private string _path;
         private WaveStream _stream;
+        private int _normalIndex;//index in playlist before shuffle
+
+        public int NormalIndex { get { return _normalIndex; } set { _normalIndex = value; } }
 
         public string Path { get { return _path; } }
         public string Extension { get { return _path.Substring(_path.LastIndexOf('.')); } }
