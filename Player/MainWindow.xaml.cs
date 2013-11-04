@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using QuartzTypeLib;
 using NAudio;
 using NAudio.Wave;
@@ -23,32 +24,53 @@ namespace Player
     /// </summary>
     public partial class MainWindow : Window
     {
+        private PlayerHandler _player = new PlayerHandler();
         public MainWindow()
         {            
             InitializeComponent();
+            _player.AddTimerHandler(SongHandler);
+            _player.NewSongStarted += _player_NewSongStarted;
+            _player.Play(@"D:\just music\Воздух\04-Ты распят был.mp3");
 
-            IWavePlayer waveOutDevice = new WaveOut();
-            WaveStream mainOutputStream = CreateInputStream(@"D:\music\Song2\03. Музыка ночи (менуэт) (В. А. Моцарт).mp3");
-
-            waveOutDevice.Init(mainOutputStream);
-
-            waveOutDevice.Play();
+            _playStatus.MouseDown += (o, e) => { };
         }
 
-        WaveStream CreateInputStream(string filename)
+        void _player_NewSongStarted(object sender, EventArgs e)
         {
-            WaveChannel32 inputStream;
-            if(filename.EndsWith(".mp3"))
-            {
-                WaveStream mp3Reader = new Mp3FileReader(filename);
-                inputStream = new WaveChannel32(mp3Reader);
-            }
-            else
-            {
-                throw new InvalidOperationException("unsupported extension");
-            }
+            _playStatus.Value = 0;
+            _playStatus.Maximum = _player.SongLength;
+        }
 
-            return inputStream;
+        private void SongHandler(object sender, EventArgs e)
+        {
+            if(_player.PlaybackState != PlaybackState.Paused)
+            {
+                _playStatus.Value++;
+            }
+        }
+
+        private void _play_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            _player.Play();
+            _pause.Visibility = System.Windows.Visibility.Visible;
+            _play.Visibility = System.Windows.Visibility.Hidden;
+        }
+
+        private void _pause_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            _player.Pause();
+            _pause.Visibility = System.Windows.Visibility.Hidden;
+            _play.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void _playStatus_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        {
+            _player.Scroll(_playStatus.Value);
+        }
+
+        private void _playStatus_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            _player.Scroll(_playStatus.Value);
         }
     }
 }

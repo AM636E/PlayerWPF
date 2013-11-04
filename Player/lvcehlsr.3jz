@@ -1,0 +1,101 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.Design;
+using System.Linq;
+using NAudio.Wave;
+using NAudio.Wave.SampleProviders;
+using System.Windows;
+
+namespace Player
+{
+    class PlayerHandler
+    {
+        private IWavePlayer waveOut;
+        private string fileName = null;
+        private WaveStream fileWaveStream;
+        private Action<float> setVolumeDelegate;
+        private string _currentSong;
+
+        public void Play(string filename)
+        {
+            if (waveOut != null)
+            {
+                if (waveOut.PlaybackState == PlaybackState.Playing)
+                {
+                    return;
+                }
+                else if (waveOut.PlaybackState == PlaybackState.Paused)
+                {
+                    waveOut.Play();
+                    return;
+                }
+            }
+
+            if (String.IsNullOrEmpty(fileName))
+            {
+                return;
+            }
+
+            try
+            {
+                CreateWaveOut();
+            }
+            catch (Exception driverCreateException)
+            {
+                MessageBox.Show(String.Format("{0}", driverCreateException.Message));
+                return;
+            }
+
+            ISampleProvider sampleProvider = null;
+            try
+            {
+                sampleProvider = CreateInputStream(fileName);
+            }
+            catch (Exception createException)
+            {
+                MessageBox.Show(String.Format("{0}", createException.Message), "Error Loading File");
+                return;
+            }
+
+            try
+            {
+                waveOut.Init(new SampleToWaveProvider(sampleProvider));
+            }
+            catch (Exception initException)
+            {
+                MessageBox.Show(String.Format("{0}", initException.Message), "Error Initializing Output");
+                return;
+            }
+            _currentSong = filename;
+           // setVolumeDelegate(); 
+            waveOut.Play();
+        }
+
+        private void CreateWaveOut()
+        {
+            CloseWaveOut();
+            int latency = 300;
+            this.waveOut = //new Mp3FileReader();//SelectedOutputDevicePlugin.CreateDevice(latency);
+            this.waveOut.PlaybackStopped += OnPlaybackStopped;
+        }
+
+        private void CloseWaveOut()
+        {
+            if (waveOut != null)
+            {
+                waveOut.Stop();
+            }
+            if (fileWaveStream != null)
+            {
+                // this one really closes the file and ACM conversion
+                fileWaveStream.Dispose();
+                this.setVolumeDelegate = null;
+            }
+            if (waveOut != null)
+            {
+                waveOut.Dispose();
+                waveOut = null;
+            }
+        }
+    }
+}

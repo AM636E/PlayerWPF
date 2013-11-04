@@ -27,18 +27,13 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <Slider Name="_playStatus" Thumb.DragStarted="_playStatus_DragStarted"  Thumb.DragCompleted="_playStatus_DragCompleted" >
-                </Slider>
                 <Grid Grid.Column="1" Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Image Source="D:\GitHub\HTML_CSS_JAVASCRIPT\task3\memory_puzzle\images\2.jpg" Grid.Column="0"></Image>
-                    <Image Name="_play" MouseUp="_play_MouseUp" Source="D:\GitHub\HTML_CSS_JAVASCRIPT\task3\memory_puzzle\images\2.jpg" Grid.Column="1"></Image>
-                    <Image Name="_pause" MouseUp="_pause_MouseUp" Source="D:\GitHub\HTML_CSS_JAVASCRIPT\task3\memory_puzzle\images\2.jpg" Grid.Column="1"></Image>
-                    <Image Source="D:\GitHub\HTML_CSS_JAVASCRIPT\task3\memory_puzzle\images\2.jpg" Grid.Column="2"></Image>
+                    <Button Name="_previosSong">Previos</Button>
                 </Grid>
             </Grid>
         </Grid>
