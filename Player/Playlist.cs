@@ -12,6 +12,7 @@ namespace Player
     {
         private PlayerHandler _player;
         private int _currentSongIndex = 0;
+
         private List<int> _shuffledIndeces;
         private bool _shoofled = false;
 
@@ -21,11 +22,11 @@ namespace Player
         }
 
         public Playlist()
-            :base()
+            : base()
         { }
 
         public Playlist(PlayerHandler player)
-            :this()
+            : this()
         {
             _player = player;
         }
@@ -36,29 +37,35 @@ namespace Player
             Random rnd = new Random();
             int j = 0;
             Song tmp = null;
-            for(var i = this.Count - 1; i > 1; i ++ )
+            for (var i = this.Count - 1; i > 1; i++)
             {
                 //generate random number j ( 0 =< j < items countdown );
                 j = rnd.Next(0, i);
 
                 this[i].NormalIndex = i;
 
-                //swap items
-                tmp = this[j];
-                this[j] = this[i];
-                this[i] = tmp;
+                _shuffledIndeces.Add(j);
             }
+
+            _shoofled = true;
         }
 
         public void UnShuffle()
         {
-
+            _shoofled = false;
         }
 
+        /*
+         * void SearchForSongs(dirs[])
+         * 
+         * Search for supported song formats in dirs
+         * 
+         * @dirs Array of DirectoryInfo
+         */
         List<string> _searchedFiles = new List<string>();
         public void SearchForSongs(DirectoryInfo[] dirs)
         {
-            foreach(DirectoryInfo directory in dirs)
+            foreach (DirectoryInfo directory in dirs)
             {
                 try
                 {
@@ -70,7 +77,7 @@ namespace Player
                         }
                     }
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     console.log(this, " ", e.Message);
                 }
@@ -79,6 +86,12 @@ namespace Player
             }
         }
 
+        /*
+         * public void Add(dif)
+         * Searched in directory for supported files add adds them to playlist
+         * 
+         * @param dir - System.IO.DirectoryInfo object folder to search in ;
+         */
         public void Add(DirectoryInfo dir)
         {
             _searchedFiles.Clear();
@@ -86,12 +99,12 @@ namespace Player
             {
                 SearchForSongs(dir.GetDirectories());
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 console.log(e);
             }
 
-            for(var i = 0 ; i < _searchedFiles.Count; i ++ )
+            for (var i = 0; i < _searchedFiles.Count; i++)
             {
                 this.Add(new Song(_searchedFiles[i]));
             }
@@ -104,6 +117,13 @@ namespace Player
             return results;
         }
 
+        /*
+         * void Play(Player)
+         * Plays a playlist in given player
+         * after song ended index of song is changed
+         * 
+         * @param player - PlayerHandler to play playlist int
+         */
         public void Play(Player.PlayerHandler player)
         {
             _player = player;
@@ -116,9 +136,14 @@ namespace Player
             Play(_player);
         }
 
-        void player_SongEnded(object sender, EventArgs e)       
+        void player_SongEnded(object sender, EventArgs e)
         {
-           _currentSongIndex = (++_currentSongIndex >= this.Count) ? 0 : _currentSongIndex;
+            _currentSongIndex = (++_currentSongIndex >= this.Count) ? 0 : _currentSongIndex;
+
+            if(_shoofled == true)
+            {
+                _currentSongIndex = _shuffledIndeces[_currentSongIndex];
+            }
         }
     }
 }
