@@ -12,7 +12,7 @@ namespace Player
     {
         public static explicit operator List<ListViewItem>(Playlist p)
         {
-            return (List<ListViewItem>)p.ToListViewItems();
+            return p.ToListViewItems().ToList<ListViewItem>();
         }
 
         public IEnumerable<ListViewItem> ToListViewItems()
