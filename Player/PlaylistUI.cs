@@ -10,44 +10,30 @@ namespace Player
 {
     partial class Playlist
     {
-        public static explicit operator ListViewItem[] (Playlist p)
+        public static explicit operator List<ListViewItem>(Playlist p)
         {
-            return p.ToListViewItems();
+            return (List<ListViewItem>)p.ToListViewItems();
         }
 
-        public ListViewItem[] ToListViewItems()
+        public IEnumerable<ListViewItem> ToListViewItems()
         {
-            ListViewItem[] items = new ListViewItem[this.Count];
-
-            for (var i = 0; i < this.Count; i++)
-            {
-                items[i] = (ListViewItem)this[i];
-
-                items[i].MouseDoubleClick += (o, e) =>
-                {
-                    Song song = ((o as ListViewItem).Content as Song);
-                    _currentSongIndex = this.IndexOf(song);
-
-                    _player.Play(song);
-                };
-            }
-
-            items[0].Visibility = System.Windows.Visibility.Collapsed;
-            return items;
+            return ToListViewItems((IEnumerable<int>)from s in this select this.IndexOf(s));            
         }
 
-        public ListViewItem[] ToListViewItem(List<int> _indeces)
+        public IEnumerable<ListViewItem> ToListViewItems(IEnumerable<int> _indeces)
         {
-            return (ListViewItem[]) from item in this
+            return from item in this
                    where _indeces.Contains(this.IndexOf(item))
                    select (ListViewItem)item;
         }
 
         public void ShowInListView(ListView lv)
         {
-            foreach (var i in (ListViewItem[])this)
+            List<ListViewItem> items =  this.ToListViewItems().ToList<ListViewItem>();
+
+            for(var i = 0; i < (items.Count<ListViewItem>()); i ++ )
             {
-                lv.Items.Add(i);
+                lv.Items.Add(items[i]);
             }
         }
     }

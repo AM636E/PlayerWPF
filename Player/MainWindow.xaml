@@ -12,7 +12,7 @@
                 <RowDefinition Height="3*"></RowDefinition>
                 <RowDefinition Height="26*"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBox Grid.Row="0" Name="_searchBar" Margin="0,0,0,10"></TextBox>
+            <TextBox Grid.Row="0" Name="_searchBar" KeyUp="_searchBar_KeyUp" Margin="0,0,0,10"></TextBox>
             <ListView Name="_playlist" Margin="0,23,0,-59" Grid.RowSpan="2"/>
         </Grid>
         <Grid Grid.Column="1">
