@@ -115,11 +115,20 @@ namespace Player
             }
         }
 
-        public Playlist Search(string pattern)
+        /*
+         * IEnumerable<int> Search(pattern)
+         * 
+         * returns all song indeces that matched with pattern
+         * 
+         * @param pattern pattern to math
+         * @return matched song indeces
+         */
+        public IEnumerable<int> Search(string pattern)
         {
-            Playlist results = new Playlist();
-
-            return results;
+          Regex reg = new Regex(pattern);
+          return from s in this
+                 where reg.IsMatch(s.ToString())
+                 select this.IndexOf(s);                   
         }
 
         /*
