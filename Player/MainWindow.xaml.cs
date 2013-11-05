@@ -85,5 +85,10 @@ namespace Player
         {
             _player.Scroll(_playStatus.Value);
         }
+
+        private void _searchBar_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }

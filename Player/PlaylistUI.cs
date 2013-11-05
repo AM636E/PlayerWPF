@@ -36,6 +36,13 @@ namespace Player
             return items;
         }
 
+        public ListViewItem[] ToListViewItem(List<int> _indeces)
+        {
+            return (ListViewItem[]) from item in this
+                   where _indeces.Contains(this.IndexOf(item))
+                   select (ListViewItem)item;
+        }
+
         public void ShowInListView(ListView lv)
         {
             foreach (var i in (ListViewItem[])this)

@@ -12,9 +12,8 @@
                 <RowDefinition Height="3*"></RowDefinition>
                 <RowDefinition Height="26*"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBox Grid.Row="0" Name="_searchBar"></TextBox>
-            <ListView Grid.Row="1" Name="_playlist" Margin="0,59,0,-59">
-            </ListView>
+            <TextBox Grid.Row="0" Name="_searchBar" Margin="0,0,0,10"></TextBox>
+            <ListView Name="_playlist" Margin="0,23,0,-59" Grid.RowSpan="2"/>
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>

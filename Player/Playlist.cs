@@ -13,7 +13,7 @@ namespace Player
         private PlayerHandler _player;
         private int _currentSongIndex = 0;
 
-        private List<int> _shuffledIndeces;
+        private List<int> _shuffledIndeces = new List<int>();
         private bool _shoofled = false;
 
         public Song CurrentSong
@@ -28,16 +28,16 @@ namespace Player
         public Playlist(PlayerHandler player)
             : this()
         {
+
             _player = player;
         }
 
         /*
-        * void Shuffle()
-        * 
-        * rearanges indeces of song in random order
-        * uses Fisher-Yates shuffle algotithm
-        * 
-        */
+         * void Shuffle()
+         * 
+         * rearanges indeces of song in random order
+         * uses Fisher-Yates shuffle algotithm
+         */
         public void Shuffle()
         {
             Random rnd = new Random();
@@ -51,7 +51,7 @@ namespace Player
 
                 _shuffledIndeces.Add(j);
             }
-
+            
             _shoofled = true;
         }
 
@@ -128,7 +128,7 @@ namespace Player
           Regex reg = new Regex(pattern);
           return from s in this
                  where reg.IsMatch(s.ToString())
-                 select this.IndexOf(s);                   
+                 select this.IndexOf(s);                  
         }
 
         /*
