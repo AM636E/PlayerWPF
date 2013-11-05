@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NAudio.Wave;
-
+using System.Windows.Controls;
 
 namespace Player
 {
@@ -44,6 +44,14 @@ namespace Player
                         throw new OperationCanceledException("Not Supported Extension");
                     }
             }
+        }
+
+        public  static explicit operator ListViewItem(Song s)
+        {
+            ListViewItem lvi = new ListViewItem();
+            lvi.Content = s;
+
+            return lvi;
         }
 
         public override string ToString()
