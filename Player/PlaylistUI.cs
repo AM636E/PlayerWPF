@@ -17,7 +17,7 @@ namespace Player
 
         public IEnumerable<ListViewItem> ToListViewItems()
         {
-            return ToListViewItems((IEnumerable<int>)from s in this select this.IndexOf(s));            
+            return ToListViewItems(Enumerable.Range(0, this.Count));            
         }
 
         public IEnumerable<ListViewItem> ToListViewItems(IEnumerable<int> _indeces)
@@ -29,12 +29,20 @@ namespace Player
 
         public void ShowInListView(ListView lv)
         {
-            List<ListViewItem> items =  this.ToListViewItems().ToList<ListViewItem>();
+            ShowInListView(Enumerable.Range(0, this.Count), lv);
+        }
 
-            for(var i = 0; i < (items.Count<ListViewItem>()); i ++ )
+        public static void ShowInListView(IEnumerable<ListViewItem> items, ListView lv)
+        {
+            foreach(var i in items)
             {
-                lv.Items.Add(items[i]);
+                lv.Items.Add(i);
             }
+        }
+
+        public void ShowInListView(IEnumerable<int> indeces, ListView lv)
+        {
+            Playlist.ShowInListView(this.ToListViewItems(indeces), lv);
         }
     }
 }
