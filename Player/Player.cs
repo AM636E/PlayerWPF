@@ -11,19 +11,25 @@ namespace Player
 {
     class PlayerHandler
     {
-
-        public event EventHandler NewSongStarted;
-        public event EventHandler SongEnded;
-        public event EventHandler SongStarted;
-
-
         private double _secondsPlayed = 0;
-        public double SecondsPlayed { get { return _secondsPlayed; } }
+        
         private IWavePlayer waveOut;
         private WaveStream fileWaveStream;
         private Action<float> setVolumeDelegate;
         private string _currentSong;
-        private DispatcherTimer _songPlayTimer;
+        private DispatcherTimer _songPlayTimer;        
+        
+        public event EventHandler NewSongStarted;
+        public event EventHandler SongEnded;
+        public event EventHandler SongStarted;
+        
+        public double SecondsPlayed { get { return _secondsPlayed; } }
+        public string CurrentSong { get { return _currentSong; } }
+        public TimeSpan CurrentTime { get { return fileWaveStream.CurrentTime; } }
+        public TimeSpan SongTotalTime { get { return fileWaveStream.TotalTime; } }
+        public double SongLengthSeconds { get { return fileWaveStream.TotalTime.TotalSeconds; } }
+        public double SongCurrentSeconds { get { return CurrentTime.TotalSeconds; } }        
+        public PlaybackState PlaybackState { get { return waveOut.PlaybackState; } }
 
         public PlayerHandler()
         {
@@ -46,14 +52,6 @@ namespace Player
         {
             _songPlayTimer.Tick += handler;
         }
-
-        public string CurrentSong { get { return _currentSong; } }
-        public TimeSpan CurrentTime { get { return fileWaveStream.CurrentTime; } }
-        public TimeSpan SongTotalTime { get { return fileWaveStream.TotalTime; } }
-        public double SongLengthSeconds { get { return fileWaveStream.TotalTime.TotalSeconds; } }
-        public double SongCurrentSeconds { get { return CurrentTime.TotalSeconds; } }
-        
-        public PlaybackState PlaybackState { get { return waveOut.PlaybackState; } }
 
         public void Play()
         {
@@ -187,11 +185,6 @@ namespace Player
             return postVolumeMeter;
         }
 
-        private ISampleProvider CreateInputStream(Song song)
-        {
-            return CreateInputStream(song.Stream);
-        }
-
         private ISampleProvider CreateInputStream(string fileName)
         {
             var plugin = GetPluginForFile(fileName);
@@ -202,8 +195,6 @@ namespace Player
 
             return CreateInputStream(plugin);
         }
-
-
 
         private void CloseWaveOut()
         {
