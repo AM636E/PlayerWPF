@@ -54,9 +54,14 @@ namespace Player
             return lvi;
         }
 
+        public string Name
+        {
+            get { return this.Path.Substring(this.Path.LastIndexOfAny(new char[] { '\\', '/' }) + 1); }
+        }
+
         public override string ToString()
-        {            
-            return this.Path.Substring(this.Path.LastIndexOfAny(new char[]{'\\', '/'}) + 1);
+        {
+            return Name;
         }
     }
 }

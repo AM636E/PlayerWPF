@@ -123,12 +123,24 @@ namespace Player
          * @param pattern pattern to math
          * @return matched song indeces
          */
-        public IEnumerable<int> Search(string pattern)
+        public IEnumerable<int> SearchInPlaylist(string pattern)
         {
           Regex reg = new Regex(pattern);
-          return from s in this
+
+         /* return (from s in this
                  where reg.IsMatch(s.ToString())
-                 select this.IndexOf(s);                  
+                 select this.IndexOf(s)).Distinct();  */
+          List<int> a = new List<int>();
+
+          for (var i = 0; i < this.Count; i ++ )
+          {
+              if(this[i].ToString().ToLower().IndexOf(pattern.ToLower()) != -1)
+              {
+                  a.Add(i);
+              }
+          }
+
+              return a;
         }
 
         /*
