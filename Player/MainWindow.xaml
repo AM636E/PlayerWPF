@@ -13,7 +13,7 @@
                 <RowDefinition Height="26*"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBox Grid.Row="0" Name="_searchBar"></TextBox>
-            <ListView Grid.Row="1" Name="_playlist">
+            <ListView Grid.Row="1" Name="_playlist" Margin="0,59,0,-59">
             </ListView>
         </Grid>
         <Grid Grid.Column="1">
