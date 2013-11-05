@@ -36,7 +36,6 @@ namespace Player
         {
             Random rnd = new Random();
             int j = 0;
-            Song tmp = null;
             for (var i = this.Count - 1; i > 1; i++)
             {
                 //generate random number j ( 0 =< j < items countdown );
@@ -136,6 +135,9 @@ namespace Player
             Play(_player);
         }
 
+       /*
+        * On player song ended changes index of song to the next
+        */
         void player_SongEnded(object sender, EventArgs e)
         {
             _currentSongIndex = (++_currentSongIndex >= this.Count) ? 0 : _currentSongIndex;

@@ -10,7 +10,7 @@ namespace Player
 {
     partial class Playlist
     {
-        public static implicit operator ListViewItem[] (Playlist p)
+        public static explicit operator ListViewItem[] (Playlist p)
         {
             return p.ToListViewItems();
         }
@@ -21,8 +21,8 @@ namespace Player
 
             for (var i = 0; i < this.Count; i++)
             {
-                items[i] = new ListViewItem();
-                items[i].Content = this[i];
+                items[i] = (ListViewItem)this[i];
+
                 items[i].MouseDoubleClick += (o, e) =>
                 {
                     Song song = ((o as ListViewItem).Content as Song);
