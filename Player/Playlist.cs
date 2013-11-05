@@ -31,7 +31,13 @@ namespace Player
             _player = player;
         }
 
-        //Uses Fisher-Yates Shuffle algorithm
+        /*
+        * void Shuffle()
+        * 
+        * rearanges indeces of song in random order
+        * uses Fisher-Yates shuffle algotithm
+        * 
+        */
         public void Shuffle()
         {
             Random rnd = new Random();
