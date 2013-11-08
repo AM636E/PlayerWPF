@@ -33,11 +33,6 @@ namespace Player
                 string output = "";
                 foreach ( var i in what )
                 {
-                    if(i is System.Collections.IEnumerable)
-                    {
-                        output += logenum(output);
-                        continue;
-                    }
                     output += i.ToString();
                 }
                 st.Write(output + '\n');

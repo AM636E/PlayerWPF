@@ -88,18 +88,23 @@ namespace Player
 
         private void _searchBar_KeyUp(object sender, KeyEventArgs e)
         {
-            console.log("key up");
             IEnumerable<int> indeces = _pl.SearchInPlaylist(_searchBar.Text);
 
             List<int> li = Enumerable.Range(0, _pl.Count).ToList<int>();
 
-            foreach(var i in indeces)
+            foreach (var i in indeces)
             {
-                li.RemoveAt(i);
+                try
+                {
+                    li.RemoveAt(i);
+                }
+                catch(Exception x)
+                {
+                    console.log(x.Message);
+                    console.log(x.StackTrace);
+                }
             }
-            
-            console.log(indeces);
-            
+
             _pl.SetVisibillity((IEnumerable<int>)li, _playlist, System.Windows.Visibility.Hidden);
         }
     }

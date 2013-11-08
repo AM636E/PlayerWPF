@@ -118,14 +118,17 @@ namespace Player
         /*
          * IEnumerable<int> Search(pattern)
          * 
-         * returns all song indeces that matched with pattern
+         * returns all song indeces that contains pattern
          * 
-         * @param pattern pattern to math
+         * @param pattern - string to check
          * @return matched song indeces
          */
         public IEnumerable<int> SearchInPlaylist(string pattern)
         {
-          Regex reg = new Regex(pattern);
+          if(pattern == "")
+          {
+              return Enumerable.Range(0, 0);
+          }
 
          /* return (from s in this
                  where reg.IsMatch(s.ToString())
