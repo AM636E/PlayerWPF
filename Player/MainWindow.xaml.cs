@@ -38,6 +38,7 @@ namespace Player
                 _pl.Add(new DirectoryInfo(@"D:\just music"));
             }
             catch (Exception e) { console.log(e); }
+
             _pl.Play(_player);
 
             _pl.ShowInListView(_playlist);
@@ -88,15 +89,25 @@ namespace Player
 
         private void _searchBar_KeyUp(object sender, KeyEventArgs e)
         {
-            IEnumerable<int> indeces = _pl.SearchInPlaylist(_searchBar.Text);
+            IEnumerable<int> toShow;
+            try
+            {
+                toShow = _pl.SearchInPlaylist(_searchBar.Text);//indeces to hide
+            }
+            catch(EmptyStringException ex)
+            {
+                _pl.SetVisibillity(Enumerable.Range(0, _pl.Count), _playlist, System.Windows.Visibility.Visible);
+                console.log(ex);
+                return;
+            }
+            List<int> toHide = Enumerable.Range(0, _pl.Count).ToList<int>();//indeces to show. now all playlist
 
-            List<int> li = Enumerable.Range(0, _pl.Count).ToList<int>();
-
-            foreach (var i in indeces)
+            //remove indeces to show from indeces to hide
+            foreach (var i in toShow)
             {
                 try
                 {
-                    li.RemoveAt(i);
+                    toHide.RemoveAt(i);
                 }
                 catch(Exception x)
                 {
@@ -104,8 +115,9 @@ namespace Player
                     console.log(x.StackTrace);
                 }
             }
-
-            _pl.SetVisibillity((IEnumerable<int>)li, _playlist, System.Windows.Visibility.Hidden);
+            
+            _pl.SetVisibillity((IEnumerable<int>)toHide, _playlist, System.Windows.Visibility.Collapsed);
+            _pl.SetVisibillity(toShow, _playlist, System.Windows.Visibility.Visible);
         }
     }
 }

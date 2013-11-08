@@ -120,6 +120,8 @@ namespace Player
          * 
          * returns all song indeces that contains pattern
          * 
+         * if pattern is empty string thows EmptyStringException
+         * 
          * @param pattern - string to check
          * @return matched song indeces
          */
@@ -127,7 +129,7 @@ namespace Player
         {
           if(pattern == "")
           {
-              return Enumerable.Range(0, 0);
+              throw new EmptyStringException();
           }
 
          /* return (from s in this

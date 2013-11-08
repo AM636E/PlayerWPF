@@ -72,6 +72,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EmptyStringException.cs" />
     <Compile Include="Playlist.cs" />
     <Compile Include="PlaylistUI.cs" />
     <Compile Include="Song.cs" />
