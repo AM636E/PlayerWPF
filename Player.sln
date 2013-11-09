@@ -4,6 +4,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.20827.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Player", "Player\Player.csproj", "{63F78E67-8648-4EAB-B952-7D665EFE6A32}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1868FC77-FD6F-4881-9CF5-DE7451806BFA} = {1868FC77-FD6F-4881-9CF5-DE7451806BFA}
+		{DA4F02E3-0B5E-42CD-B8D9-5583FA51D66E} = {DA4F02E3-0B5E-42CD-B8D9-5583FA51D66E}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAudio", "NAudio-Source\NAudio\NAudio.csproj", "{DA4F02E3-0B5E-42CD-B8D9-5583FA51D66E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAudio.WindowsMediaFormat", "NAudio-Source\NAudio.WindowsMediaFormat\NAudio.WindowsMediaFormat.csproj", "{1868FC77-FD6F-4881-9CF5-DE7451806BFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAudioDemo", "NAudio-Source\NAudioDemo\NAudioDemo.csproj", "{C37A547B-F31E-45FB-870A-CFA704D06152}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,18 @@ Global
 		{63F78E67-8648-4EAB-B952-7D665EFE6A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63F78E67-8648-4EAB-B952-7D665EFE6A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63F78E67-8648-4EAB-B952-7D665EFE6A32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA4F02E3-0B5E-42CD-B8D9-5583FA51D66E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA4F02E3-0B5E-42CD-B8D9-5583FA51D66E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA4F02E3-0B5E-42CD-B8D9-5583FA51D66E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA4F02E3-0B5E-42CD-B8D9-5583FA51D66E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1868FC77-FD6F-4881-9CF5-DE7451806BFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1868FC77-FD6F-4881-9CF5-DE7451806BFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1868FC77-FD6F-4881-9CF5-DE7451806BFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1868FC77-FD6F-4881-9CF5-DE7451806BFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C37A547B-F31E-45FB-870A-CFA704D06152}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C37A547B-F31E-45FB-870A-CFA704D06152}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C37A547B-F31E-45FB-870A-CFA704D06152}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C37A547B-F31E-45FB-870A-CFA704D06152}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

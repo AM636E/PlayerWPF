@@ -14,15 +14,28 @@ namespace Player
 
         }
 
+        public static string logenum(System.Collections.IEnumerable e)
+        {
+            string output = "[";
+            foreach(var i in e)
+            {
+                output += i.ToString() + ",";
+            }
+            output += "]";
+
+            return output;
+        }
+
         public static void log(params object[] what)
         {
             using (StreamWriter st = new StreamWriter(_path_, true))
             {
+                string output = "";
                 foreach ( var i in what )
                 {
-                    st.Write(i.ToString() + ' ');
+                    output += i.ToString();
                 }
-                st.WriteLine("----");
+                st.Write(output + '\n');
             }
         }
 
