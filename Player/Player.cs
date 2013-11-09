@@ -32,34 +32,30 @@ namespace Player
         public PlaybackState PlaybackState { get { return waveOut.PlaybackState; } }
 
 
-
-        public string CurrentMinutes
-        {
-            get 
-            {
-                return FormatNumber(CurrentTime.Minutes);
-            }
-        }
-
-        public string CurrentSeconds
-        {
-            get
-            {
-                return FormatNumber(CurrentTime.Seconds);
-            }
-        }
-
         public string CurrentTimeLable
         {
             get
             {
-                return CurrentMinutes + ":" + CurrentSeconds;
+                return FormatLabel(CurrentTime.Minutes, CurrentTime.Seconds);
+            }
+        }
+
+        public string TotalTimeLabel
+        {
+            get
+            {
+                return FormatLabel(SongTotalTime.Minutes, SongTotalTime.Seconds);
             }
         }
 
         private string FormatNumber(int n)
         {
             return (n > 10) ? n.ToString() : "0" + n.ToString(); 
+        }
+
+        private string FormatLabel(int left, int right)
+        {
+            return FormatNumber(left) + ":" + FormatNumber(right);
         }
 
         public PlayerHandler()

@@ -59,13 +59,14 @@ namespace Player
         {
             _playStatus.Value = 0;
             _playStatus.Maximum = _player.SongLengthSeconds;
+            _totalTime.Content = _player.TotalTimeLabel;
         }
 
         private void SongHandler(object sender, EventArgs e)
         {
             if(_player.PlaybackState != PlaybackState.Paused)
             {
-                _currentTime.Content = _player.CurrentTime.Minutes.ToString() + ":" + _player.CurrentTime.Seconds.ToString();
+                _currentTime.Content = _player.CurrentTimeLable;
                 _playStatus.Value++;
             }
         }
