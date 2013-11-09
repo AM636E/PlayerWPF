@@ -45,7 +45,7 @@ namespace Player
             for (var i = this.Count - 1; i > 1; i++)
             {
                 //generate random number j ( 0 =< j < items left );
-                j = rnd.Next(0, i);
+               j = rnd.Next(0, i);
 
                 this[i].NormalIndex = i;
 
