@@ -25,10 +25,15 @@
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Slider Name="_playStatus" Thumb.DragStarted="_playStatus_DragStarted"  Thumb.DragCompleted="_playStatus_DragCompleted" >
                 </Slider>
-                <Grid Grid.Column="1" Grid.Row="1">
+                <DockPanel LastChildFill="False" Grid.Row="1">
+                    <Label Name="_currentTime">0:00</Label>
+                    <Label Name="_totalTime" DockPanel.Dock="Right">000</Label>
+                </DockPanel>
+                <Grid Grid.Column="1" Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>

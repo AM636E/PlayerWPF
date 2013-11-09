@@ -34,12 +34,11 @@ namespace Player
             _player.NewSongStarted += _player_NewSongStarted;
             _pl = new Playlist();
 
-            _pl.Add(new Song("1"));
-            _pl.Add(new Song("2"));
-            _pl.Add(new Song("2"));
-            _pl.Add(new Song("4"));
+            _pl.Add(new DirectoryInfo(@"D:\just music"));
 
             _pl.Shuffle();
+
+            _pl.Play(_player);
 
             _pl.ShowInListView(_playlist);
 
@@ -66,6 +65,7 @@ namespace Player
         {
             if(_player.PlaybackState != PlaybackState.Paused)
             {
+                _currentTime.Content = _player.CurrentTime.Minutes.ToString() + ":" + _player.CurrentTime.Seconds.ToString();
                 _playStatus.Value++;
             }
         }

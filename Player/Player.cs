@@ -31,6 +31,37 @@ namespace Player
         public double SongCurrentSeconds { get { return CurrentTime.TotalSeconds; } }        
         public PlaybackState PlaybackState { get { return waveOut.PlaybackState; } }
 
+
+
+        public string CurrentMinutes
+        {
+            get 
+            {
+                return FormatNumber(CurrentTime.Minutes);
+            }
+        }
+
+        public string CurrentSeconds
+        {
+            get
+            {
+                return FormatNumber(CurrentTime.Seconds);
+            }
+        }
+
+        public string CurrentTimeLable
+        {
+            get
+            {
+                return CurrentMinutes + ":" + CurrentSeconds;
+            }
+        }
+
+        private string FormatNumber(int n)
+        {
+            return (n > 10) ? n.ToString() : "0" + n.ToString(); 
+        }
+
         public PlayerHandler()
         {
             _songPlayTimer = new DispatcherTimer();
