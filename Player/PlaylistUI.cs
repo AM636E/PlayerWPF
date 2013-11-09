@@ -42,7 +42,22 @@ namespace Player
 
         public void ShowInListView(IEnumerable<int> indeces, ListView lv)
         {
-            Playlist.ShowInListView(this.ToListViewItems(indeces), lv);
+            var items = this.ToListViewItems(indeces);
+
+            for (var i = 0; i < items.Count; i ++  )
+            {
+                items[i].MouseDoubleClick += (o, e) =>
+                    {
+                        console.log((o as ListViewItem).Content as Song);
+                        this._currentSongIndex = this.IndexOf((o as ListViewItem).Content as Song);
+                        if(ClickedOnSong != null)
+                        {
+                            ClickedOnSong(this, EventArgs.Empty);
+                        }
+                    };
+            }
+
+                Playlist.ShowInListView(items, lv);
         }
 
         public void SetVisibillity(IEnumerable<int> indeces, ListView lv, System.Windows.Visibility visibillity)

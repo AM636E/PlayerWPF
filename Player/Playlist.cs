@@ -10,6 +10,8 @@ namespace Player
 {
     partial class Playlist : List<Song>
     {
+        public event EventHandler ClickedOnSong;
+
         private PlayerHandler _player;
         private int _currentSongIndex = 0;
 

@@ -38,15 +38,24 @@ namespace Player
                 _pl.Add(new DirectoryInfo(@"D:\just music"));
             }
             catch (Exception e) { console.log(e); }
-
-            _pl.Play(_player);
+          
+            _pl.Shuffle();
+         
+           // _pl.Play(_player);
 
             _pl.ShowInListView(_playlist);
+
+            _pl.ClickedOnSong += _pl_ClickedOnSong;
 
             _player.SongEnded += (o, e) =>
                 {
                     _player.Play(_pl.CurrentSong);
                 };
+        }
+
+        void _pl_ClickedOnSong(object sender, EventArgs e)
+        {
+            _player.Play(_pl.CurrentSong);
         }
 
         void _player_NewSongStarted(object sender, EventArgs e)
