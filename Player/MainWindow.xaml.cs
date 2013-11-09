@@ -33,15 +33,13 @@ namespace Player
             _player.AddTimerHandler(SongHandler);
             _player.NewSongStarted += _player_NewSongStarted;
             _pl = new Playlist();
-            try
-            {
-                _pl.Add(new DirectoryInfo(@"D:\just music"));
-            }
-            catch (Exception e) { console.log(e); }
-          
+
+            _pl.Add(new Song("1"));
+            _pl.Add(new Song("2"));
+            _pl.Add(new Song("2"));
+            _pl.Add(new Song("4"));
+
             _pl.Shuffle();
-         
-           // _pl.Play(_player);
 
             _pl.ShowInListView(_playlist);
 
