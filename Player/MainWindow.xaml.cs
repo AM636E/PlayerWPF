@@ -33,20 +33,27 @@ namespace Player
             _player.AddTimerHandler(SongHandler);
             _player.NewSongStarted += _player_NewSongStarted;
             _pl = new Playlist();
-            try
-            {
-                _pl.Add(new DirectoryInfo(@"D:\just music"));
-            }
-            catch (Exception e) { console.log(e); }
 
-            _pl.Play(_player);
+            _pl.Add(new Song("1"));
+            _pl.Add(new Song("2"));
+            _pl.Add(new Song("2"));
+            _pl.Add(new Song("4"));
+
+            _pl.Shuffle();
 
             _pl.ShowInListView(_playlist);
+
+            _pl.ClickedOnSong += _pl_ClickedOnSong;
 
             _player.SongEnded += (o, e) =>
                 {
                     _player.Play(_pl.CurrentSong);
                 };
+        }
+
+        void _pl_ClickedOnSong(object sender, EventArgs e)
+        {
+            _player.Play(_pl.CurrentSong);
         }
 
         void _player_NewSongStarted(object sender, EventArgs e)
