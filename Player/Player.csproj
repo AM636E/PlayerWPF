@@ -50,8 +50,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="QuartzTypeLib">
-      <HintPath>..\Samples\MiniPlayer\QuartzTypeLib\bin\Debug\QuartzTypeLib.dll</HintPath>
+    <Reference Include="NAudio">
+      <HintPath>..\NAudio-Release\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.WindowsMediaFormat">
+      <HintPath>..\NAudio-Release\NAudio.WindowsMediaFormat.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -150,17 +153,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NAudio-Source\NAudio.WindowsMediaFormat\NAudio.WindowsMediaFormat.csproj">
-      <Project>{1868fc77-fd6f-4881-9cf5-de7451806bfa}</Project>
-      <Name>NAudio.WindowsMediaFormat</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NAudio-Source\NAudio\NAudio.csproj">
-      <Project>{da4f02e3-0b5e-42cd-b8d9-5583fa51d66e}</Project>
-      <Name>NAudio</Name>
-    </ProjectReference>
+    <Folder Include="Skins\Default\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Skins\Default\" />
+    <Resource Include="images\pause.png" />
+    <Resource Include="images\play.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

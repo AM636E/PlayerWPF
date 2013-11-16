@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using QuartzTypeLib;
 using NAudio;
 using NAudio.Wave;
 using System.IO;
@@ -34,7 +33,7 @@ namespace Player
             _player.NewSongStarted += _player_NewSongStarted;
             _pl = new Playlist();
 
-            _pl.Add(new DirectoryInfo(@"D:\just music"));
+            _pl.Add(new DirectoryInfo(@"H:\"));
 
             _pl.Shuffle();
 

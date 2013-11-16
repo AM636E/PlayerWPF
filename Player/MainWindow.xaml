@@ -40,8 +40,8 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <!--<Image Source="D:\GitHub\HTML_CSS_JAVASCRIPT\task3\memory_puzzle\images\2.jpg" Grid.Column="0"></Image>-->
-                    <Image Name="_play" MouseUp="_play_MouseUp" Source="D:\GitHub\Player\Player\Skins\Default\images\play.jpg" Grid.Column="1"></Image>
-                    <Image Name="_pause" MouseUp="_pause_MouseUp" Source="D:\GitHub\Player\Player\Skins\Default\images\pause.jpg" Grid.Column="1"></Image>
+                    <Image Name="_play" MouseUp="_play_MouseUp" Source="images\play.png" Grid.Column="1"></Image>
+                    <Image Name="_pause" MouseUp="_pause_MouseUp" Source="images\pause.png" Grid.Column="1"></Image>
                     <!--<Image Source="D:\GitHub\HTML_CSS_JAVASCRIPT\task3\memory_puzzle\images\2.jpg" Grid.Column="2"></Image>-->
                 </Grid>
             </Grid>
